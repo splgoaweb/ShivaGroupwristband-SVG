@@ -1,0 +1,61 @@
+﻿@model AddToCartPopupModel
+@using Nop.Core.Domain.Orders
+
+<div class="cart-popup overview ">
+    <div class="cart-popup-in">
+        <div class="popuop-title">
+            @if (!Model.isErrorNotification)
+            {
+                if (Model.shoppingCartTypeId == (int)ShoppingCartType.ShoppingCart)
+                {
+                    <h1>@T("AddToPopUp.Title")</h1>
+                }
+                else
+                {
+                    <h1>@T("AddToPopUp.WishlistTitle")</h1>
+                }
+            }
+            else
+            {
+                <h1>@T("AddToPopUp.Title.Warning")</h1>
+            }
+            <span class="k-icon k-i-close cart-popup-close"></span>
+        </div>
+        @if (!Model.isErrorNotification)
+        {
+            <div class="popup-content">
+                <img alt="Picture of Apple Smart Watch" src="@Model.picture" title="Show details for Apple Smart Watch">
+                <div class="popup-description">
+                    <p class="popup-product-name">@Model.name</p>
+                    <p class="popup-unit-price">@T("AddToPopUp.Title.UnitPrice") : @Model.unitPrice</p>
+                    <div class="popup-qty-price"><span class="qty">@T("AddToPopUp.Title.TotalQty") : @Model.qty </span><span class="price">@T("AddToPopUp.Title.TotalPrice") : @Model.toalPrice</span></div>
+                    <div class="productAddedToCartWindowSummary popup-btn">
+                        <button type="button" id="add-to-wishlist-button-25" class="button-2 add-to-wishlist-button valid" value="Add to wishlist" data-productid="25" onclick='setLocation("/home")' aria-invalid="false"><span>@T("AddToPopUp.Btn.Continue")</span></button>
+                        @if (Model.shoppingCartTypeId == (int)ShoppingCartType.ShoppingCart)
+                        {
+                            <button type="button" id="add-to-cart-button-25" class="button-1 add-to-cart-button" value="Add to cart" data-productid="25" onclick='setLocation("/cart")'><span>@T("AddToPopUp.Btn.Gotocart")</span></button>
+                        }
+                        else
+                        {
+                            <button type="button" id="add-to-cart-button-25" class="button-1 add-to-cart-button" value="Add to cart" data-productid="25" onclick='setLocation("/wishlist")'><span>@T("AddToPopUp.Btn.Gotowishlist")</span></button>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @if (Model.addToCartWarnings.Any())
+            {
+                <div class="popup-error">
+                    <ul>
+                        @foreach (string warning in Model.addToCartWarnings)
+                        {
+                            <li>@warning</li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+</div>

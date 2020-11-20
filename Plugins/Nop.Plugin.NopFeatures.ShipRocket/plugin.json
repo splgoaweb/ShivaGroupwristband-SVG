@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "ShipRocket",
+  "SystemName": "NopFeatures.ShipRocket",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "Nop Features",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.NopFeatures.ShipRocket.dll",
+  "Description": "Shipping method plugin"
+}

@@ -1,0 +1,5 @@
+﻿{
+  "DataConnectionString": "Data Source=WEB\\SQLEXPRESS01;Initial Catalog=DB_A5D928_wristband;Integrated Security=True;Persist Security Info=False;",
+  "DataProvider": "sqlserver",
+  "RawDataSettings": {}
+}

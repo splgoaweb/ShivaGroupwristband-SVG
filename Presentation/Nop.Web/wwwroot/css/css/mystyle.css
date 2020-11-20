@@ -1,0 +1,220 @@
+/* Restriction area SVG */
+
+.st0 {
+    fill: #1BB26A;
+}
+
+.st1 {
+    fill: #EC2728;
+}
+
+.st2 {
+    fill: #F8FAFB;
+}
+
+.st3 {
+    font-family: 'Helvetica';
+}
+
+.st4 {
+    font-size: 6px;
+}
+
+.st5 {
+    fill: #D7E02C;
+}
+
+
+/* Button to save as PNG */
+
+
+/* #btn-png{
+  margin-left:10px;
+  padding-top:7px;
+  padding:7px;
+  border:none;
+  background-color:white;
+  box-shadow:0px 1px 5px 0px #0000009e;
+  color:black; 
+}
+
+/* Button to save as SVG */
+
+
+/* #btn-svg{
+  margin-left:10px;
+  padding:7px;
+  border-radius:2px;
+  border:none;
+  background-color: white;
+  box-shadow:0px 1px 5px 0px #0000009e;
+  color:black; 
+} */
+
+
+/* FOR Text buttons*/
+
+#tbtn {
+    height: 45px;
+    width: 40px;
+    border: 1px solid rgb(199, 198, 198);
+    background-color: white;
+    font-size: 15px;
+}
+
+
+/* FOR Color buttons*/
+
+.Cbtn {
+    border: 1px solid #b1b1b1;
+    background-size: cover!important;
+    width: 100%;
+    height: 32px;
+}
+
+
+/* FOR Pattern buttons*/
+
+.Pbtn {
+    border: 1px solid #b1b1b1;
+    background-size: cover!important;
+    width: 100%;
+    height: 32px;
+}
+
+.logo {
+    cursor: move;
+}
+
+.ICONS {
+    cursor: pointer;
+}
+/* FOR Text line 1*/
+#myP {
+    margin-top: 30px;
+    cursor: move;
+}
+
+
+/* FOR Text line 2*/
+
+#myPnew {
+    margin-top: 30px;
+    cursor: move;
+}
+
+
+/* New Line */
+
+#newline {
+    display: none;
+}
+
+
+/* For Previewing the SVG */
+
+.preview {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 280px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/*Preview Header*/
+
+
+/* .modal-header {
+  background-color: yellow;
+  margin: auto;
+  padding: 20px;
+  width: 1200px;
+  height:20px;
+} */
+
+
+/* Modal Content */
+
+.preview-Image {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 1200px;
+    height: 250px;
+}
+
+
+/*Preview footer*/
+
+.modal-footer {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    width: 1200px;
+    height: 3px;
+    border: none;
+}
+
+
+/* For Preview button */
+
+
+/* #btn-Preview-Image{
+  height:32px;
+  width:70px;
+  border:none;
+  background-color: white;
+  box-shadow:0px 1px 5px 0px #0000009e;
+  color:black;
+} */
+
+
+/* The Close Button */
+
+.close {
+    color: #504f4f;
+    float: right;
+    font-size: 25px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* The Continue Editing Button */
+
+.ce {
+    height: 32px;
+    width: 125px;
+    background-color: rgb(13, 137, 194);
+    border: white;
+    color: white;
+    font-size: 14px;
+    font-family: Helvetica, sans-serif;
+}
+
+
+/* The Add to Car Button */
+
+.cart {
+    height: 32px;
+    width: 125px;
+    background-color: rgb(13, 137, 194);
+    border: white;
+    color: white;
+    font-family: Helvetica, sans-serif;
+}

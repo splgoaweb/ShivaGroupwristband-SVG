@@ -1,0 +1,113 @@
+﻿@model ConfigurationModel
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+@await Component.InvokeAsync("StoreScopeConfiguration")
+
+<script>
+    $(document).ready(function () {
+        $("#@Html.IdFor(model => model.Enable)").click(toggleEnable);
+        toggleEnable();
+    });
+
+    function toggleEnable() {
+        if ($('#@Html.IdFor(model => model.Enable)').is(':checked')) {
+            $('#pnlConfiguration').show();
+        }
+        else {
+            $('#pnlConfiguration').hide();
+        }
+    }
+</script>
+
+<form asp-controller="ShipRocket" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="Enable_OverrideForStore" asp-input="Enable" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="Enable" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Enable" />
+                        <span asp-validation-for="Enable"></span>
+                    </div>
+                </div>
+                <nop-nested-setting asp-for="Enable">
+                    <div id="pnlConfiguration">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="UserEmail_OverrideForStore" asp-input="UserEmail" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="UserEmail" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="UserEmail" />
+                                <span asp-validation-for="UserEmail"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="Password_OverrideForStore" asp-input="Password" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="Password" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="Password" />
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="BaseURL_OverrideForStore" asp-input="BaseURL" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="BaseURL" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="BaseURL" />
+                                <span asp-validation-for="BaseURL"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="MinAmountForEWayBill_OverrideForStore" asp-input="MinAmountForEWayBill" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="MinAmountForEWayBill" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="MinAmountForEWayBill" />
+                                <span asp-validation-for="MinAmountForEWayBill"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="ChannelId_OverrideForStore" asp-input="ChannelId" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="ChannelId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="ChannelId" />
+                                <span asp-validation-for="ChannelId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="PickUpLocation_OverrideForStore" asp-input="PickUpLocation" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="PickUpLocation" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="PickUpLocation" />
+                                <span asp-validation-for="PickUpLocation"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-9">
+                            <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
+                        </div>
+                    </div>
+                </nop-nested-setting>
+            </div>
+        </div>
+    </div>
+</form>
