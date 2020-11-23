@@ -15,12 +15,16 @@ function changeColor(id) {
 
 //change the background pattern of SVG
 function P(pattern) {
+    var base_url = window.location.origin;
+    console.log('base_url > ', base_url);
+    //var p = base_url+pattern;
+    //console.log('p > ', p);
     document.getElementById("nox").setAttribute("style", "fill: none");
     var xhr = new XMLHttpRequest();
     xhr.open("GET", pattern, true);
     xhr.responseType = "blob";
     xhr.onload = function(e) {
-        console.log(this.response);
+        console.log('---> ',this.response);
         var reader = new FileReader();
         reader.onload = function(event) {
             var res = event.target.result;

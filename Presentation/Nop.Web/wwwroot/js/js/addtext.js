@@ -203,12 +203,14 @@ function lowercase2() {
 
 //Color Picker to change color of SVG Text 1
 function textcolor() {
-    var x = document.getElementById("tc").value;
+   
+    var x = document.getElementById("tc").value; 
     document.getElementById("myP").style.fill = x;
 }
 //Color Picker to change color of SVG Text 2
 function textcolor2() {
-    var x = document.getElementById("tc2").value;
+    console.log('-In textcolor2-');
+    var x = document.getElementById("tc2").value; console.log('x -> ', x);
     document.getElementById("myPnew").style.fill = x;
 }
 
@@ -219,6 +221,10 @@ function textcolor2() {
 Draggable.create(".logo", {
     bounds: "#nox",
 });
+Draggable.create(".code_image", {
+    bounds: "#noxBarcode",
+});
+
 Draggable.create(".myP", {
     //(Text Line 1)
     bounds: "#nox",

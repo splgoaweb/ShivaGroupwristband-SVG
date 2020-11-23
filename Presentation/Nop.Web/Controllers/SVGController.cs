@@ -35,6 +35,16 @@ namespace Nop.Web.Controllers
             ViewBag.svgcontent = svgcontent.SvgContent;
             return View();
         }
+        public ActionResult GetSVGpage(int productId)
+        {
+            var svgcontent = _svgcontentService.GetContentByProductId(productId);
+            if (svgcontent == null)
+                return Json(new { error = "No poll answer found with the specified id" });
+
+            ViewBag.svgcontent = svgcontent.SvgContent;
+            return View();
+        }
+
         #endregion Methods
     }
 }
