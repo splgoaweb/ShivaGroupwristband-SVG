@@ -162,8 +162,37 @@
                 var svgXml = (new XMLSerializer).serializeToString(svgElement);
                 var svgData = "data:image/svg+xml," + encodeURIComponent(svgXml);
                 console.log('svgData > ', svgData);
+                console.log('svgElement > ', svgElement);
                 $("#btn-svg").attr("download", "customBandSvg.svg").attr("href", svgData);
-                console.log('btn-svg > ', $("#btn-svg"));
+            });
+
+            $('#save-btn').on('click', function () {
+                console.log('save-btn > ');                
+
+                var svgElementText = document.getElementById('divSVG').innerHTML.toString();
+                console.log('save-btn > svgElementText > ', svgElementText);               
+
+                var Data = {
+                    id: '123456',
+                    svg: svgElementText
+                };               
+
+                console.log('save-btn > Data > ', Data);
+               
+                 
+                @*jQuery.ajax({
+                    type: "POST",
+                    url: "@Url.Action("SaveEditedSvg")",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(roles),
+                    success: function (data) { alert(data); },
+                    failure: function (errMsg) {
+                        alert(errMsg);
+                    }
+                });*@
+                 
+
             });
 
 
@@ -227,6 +256,9 @@
                                 <li><i class="ti-reload" type="button"></i></li>
                                 -->
                                 <li>
+                                    <button id="save-btn" class="save-btn"> Save </button>
+                                </li>
+                                <li>
                                     <img style="width:25px;" class="ti-eye ICONS" id="btn-Preview" src="/g-icons/view.png" title="Preview" alt="Preview" />
                                 </li>
                                 <li>
@@ -235,8 +267,9 @@
                                 <li>
                                     <a id="btn-svg" href="Javascript:void(0)">
                                         <img style="width:25px;" class="ti-download ICONS" src="/g-icons/download.png" title="Download Svg" alt="Download Svg" />
-                                    </a>                                    
+                                    </a>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
