@@ -1,12 +1,17 @@
+
+/*
 //Uploading image in SVG
 var upload = document.getElementById("upload");
 console.log('upload : ', upload);
 // var patternImage = document.querySelector("#img1 image");
-var patternImage = document.querySelector("#logo_image");
+var patternImage = null;//document.querySelector("#logo_image");
 console.log('patternImage : ', patternImage);
 var currentBlobData = null;
 
-upload.addEventListener("change", function(e) {
+upload.addEventListener("change", function (e) {
+    console.log('e : ', e);
+
+     patternImage = document.querySelector("#logo_image");
     var file = this.files[0];
     if (currentBlobData) {
         URL.revokeObjectURL(currentBlobData);
@@ -20,7 +25,7 @@ upload.addEventListener("change", function(e) {
     console.log('patternImage : ', patternImage);
 });
 
-
+*/
 
 function previewFile() {
     console.log('in previewFile : ');

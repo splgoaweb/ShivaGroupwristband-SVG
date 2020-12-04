@@ -12,7 +12,7 @@
 </head>
 <body>
 
- 
+
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/css/font-awesome.css">
@@ -42,200 +42,39 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.5/canvg.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@latest/dist/interact.min.js"></script>
+    <script src="../js/js/interaction.js"></script>
+
+    <script src="../js/js/custom-jquery.js"></script>
 
 
+    <style>
+        .resizable {
+            /* width: 120px; */
+            border-radius: 0.75rem;
+            padding: 20px;
+            margin: 1rem;
+            background-color: #29e;
+            color: white;
+            font-size: 20px;
+            font-family: sans-serif;
+            overflow: hidden;
+            touch-action: none;
+            _box-sizing: border-box;
+        }
 
-    <script>
-        $(document).ready(function () {
-            console.log('----------> Hi samihan  ---> $(document).ready ');
-            $('#canvas-area').hide();
-
-            $('#close-preview').click(function () {
-                $('#canvas-area').fadeOut();
-            });
-            $('.Cbtn').click(function () {
-                refreshCanvas();
-            });
-            $('.swatch').click(function () {
-                refreshCanvas();
-            });
-            $('#myP').click(function () {
-                refreshCanvas();
-            });
-            $('#TextField').change(function () {
-                refreshCanvas();
-            });
-            $('#TextField').keyup(function () {
-                refreshCanvas();
-            });
-            $('#btn-Preview').click(function () {
-                refreshCanvas();
-                $('#canvas-area').fadeIn();
-            });
-
-            function refreshCanvas() {
-                var canvas = document.getElementById('canvas');
-                var ctx = canvas.getContext('2d');
-                var data = (new XMLSerializer()).serializeToString(svg);
-                var DOMURL = window.URL || window.webkitURL || window;
-                var img = new Image();
-                var svgBlob = new Blob([data], {
-                    type: 'image/svg+xml;charset=utf-8'
-                });
-                var url = DOMURL.createObjectURL(svgBlob);
-                img.onload = function () {
-                    ctx.drawImage(img, 0, 0);
-                    DOMURL.revokeObjectURL(url);
-                    var imgURI = canvas
-                        .toDataURL('image/png')
-                        .replace('image/png', 'image/octet-stream');
-                };
-                img.src = url;
-            }
-
-
-
-
-            $('#tc').click(function () {
-                var x = document.getElementById("tc").value;
-                //  console.log('Hi -> textcolor : x = ', x);
-                document.getElementById("myP").style.color = x;
-                // console.log(' document.getElementById -> ', document.getElementById("myP"));
-            });
-
-
-            //DOWNLOAD AS PNG
-            var btn = document.getElementById('save_png');
-            var svg = document.getElementById('band');
-            var canvas = document.querySelector('canvas');
-
-            function triggerDownload(imgURI) {
-                var evt = new MouseEvent('click', {
-                    view: window,
-                    bubbles: false,
-                    cancelable: true
-                });
-                var a = document.createElement('a');
-                a.setAttribute('download', 'wristband.png');
-                a.setAttribute('href', imgURI);
-                a.setAttribute('target', '_blank');
-                a.dispatchEvent(evt);
-            }
-
-            btn.addEventListener('click', function () {
-                var canvas = document.getElementById('canvas');
-                var ctx = canvas.getContext('2d');
-                var data = (new XMLSerializer()).serializeToString(svg);
-                var DOMURL = window.URL || window.webkitURL || window;
-                var img = new Image();
-                var svgBlob = new Blob([data], {
-                    type: 'image/svg+xml;charset=utf-8'
-                });
-                var url = DOMURL.createObjectURL(svgBlob);
-                console.log('url : ', url);
-                try {
-                    img.onload = function () {
-                        console.log('img.onload : ', img);
-                        ctx.drawImage(img, 0, 0);
-                        DOMURL.revokeObjectURL(url);
-
-                        var imgURI = canvas
-                            .toDataURL('image/png')
-                            .replace('image/png', 'image/octet-stream');
-                        console.log('imgURI : ', imgURI);
-
-                        triggerDownload(imgURI);
-                    };
-                } catch (error) { console.log('error > ', error); }
-                img.src = url;
-            })
-
-
-            // var element = $("#image-content-div");
-            // var getCanvas;
-
-
-            $("#btn-svg").on('click', function () {
-                console.log('btn-svg > ');
-
-                var svgElement = document.getElementById('band');
-                var svgXml = (new XMLSerializer).serializeToString(svgElement);
-                var svgData = "data:image/svg+xml," + encodeURIComponent(svgXml);
-                console.log('svgData > ', svgData);
-                console.log('svgElement > ', svgElement);
-                $("#btn-svg").attr("download", "customBandSvg.svg").attr("href", svgData);
-            });
-
-            $('#save-btn').on('click', function () {
-                console.log('save-btn > ');                
-
-                var svgElementText = document.getElementById('divSVG').innerHTML.toString();
-                console.log('save-btn > svgElementText > ', svgElementText);               
-
-                var Data = {
-                    id: '123456',
-                    svg: svgElementText
-                };               
-
-                console.log('save-btn > Data > ', Data);
-               
-                 
-                @*jQuery.ajax({
-                    type: "POST",
-                    url: "@Url.Action("SaveEditedSvg")",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(roles),
-                    success: function (data) { alert(data); },
-                    failure: function (errMsg) {
-                        alert(errMsg);
-                    }
-                });*@
-                 
-
-            });
-
-
-
-            // $("#btn-Preview").on('click', function() {
-            //     var nodesToRecover = [];
-            //     var nodesToRemove = [];
-            //     console.log('Clicked btn');
-
-
-
-            //     element = $("#image-content-div");
-            //     console.log('element > ', element);
-
-
-            //     html2canvas(element, {
-            //         letterRendering: 1,
-            //         logging: true,
-            //         profile: true,
-            //         useCORS: true,
-            //         allowTaint: true,
-            //         onrendered: function(canvas) {
-            //             console.log('canvas > ', canvas);
-            //             var data = canvas.toDataURL('image/jpeg', 0.9);
-            //             console.log('data > ', data);
-            //             var src = encodeURI(data);
-            //             console.log('src > ', src);
-            //             document.getElementById('screenshot').src = src;
-            //             document.getElementById("screenshot").focus();
-            //             console.log('pImage > ', document.getElementById("pImage"));
-            //             canvg(canvas, document.getElementById("canvas").innerHTML);
-            //         }
-
-
-            //     });
-
-
-
-            // });
-
-
-        });
-    </script>
+        .draggable {
+            /* width: 25%; */
+            min-height: 6.5em;
+            margin: 1rem 0 0 1rem;
+            background-color: #29e;
+            color: white;
+            border-radius: 0.75em;
+            padding: 4%;
+            touch-action: none;
+            user-select: none;
+        }
+    </style>
 
 
 
@@ -259,16 +98,19 @@
                                     <button id="save-btn" class="save-btn"> Save </button>
                                 </li>
                                 <li>
-                                    <img style="width:25px;" class="ti-eye ICONS" id="btn-Preview" src="/g-icons/view.png" title="Preview" alt="Preview" />
+                                    <img style="width:25px;" class="ti-eye ICONS" id="btn-Preview" src="../g-icons/view.png" title="Preview" alt="Preview" />
                                 </li>
                                 <li>
-                                    <img style="width:25px;" class="ti-save ICONS" id="save_png" src="/g-icons/save.png" title="Save Image" alt="Save Image" />
+                                    <img style="width:25px;" class="ti-save ICONS" id="save_png" src="../g-icons/save.png" title="Save Image" alt="Save Image" />
                                 </li>
                                 <li>
                                     <a id="btn-svg" href="Javascript:void(0)">
-                                        <img style="width:25px;" class="ti-download ICONS" src="/g-icons/download.png" title="Download Svg" alt="Download Svg" />
+                                        <img style="width:25px;" class="ti-download ICONS" src="../g-icons/download.png" title="Download Svg" alt="Download Svg" />
                                     </a>
                                 </li>
+                                
+
+
 
                             </ul>
                         </div>
@@ -312,13 +154,33 @@
                 </text>
             </g>
         </svg>
+        <br>
+        <br>
 
-
+        <div class="popup">
+            <span class="popuptext popuptextVisible" id="myPopup">
+                <input id='TextFieldEdit' type='text' value='' style='width:100%' />
+            </span>
+        </div>
 
         <div id="divSVG">
             @Html.Raw(ViewBag.svgcontent)
         </div>
 
+
+
+        <div id="img-upload-area">
+            <div>
+                <button class='img-size-btn' type="button" id="btn-remove" title='Delete'><b>&#x2421;</b> </button>
+                <button class='img-size-btn' type="button" id='logo_image_minus' title='Decrease size'><b>&#x002D;</b></button>
+                <button class='img-size-btn' id='logo_image_plus' type="button" title='Increase size'><b>&#x002B;</b></button>
+                <button class='img-size-btn movement-btn' id='image_move_left' type="button" title='Move Left'><b>	&#x2B98;</b></button>
+                <button class='img-size-btn movement-btn' type="button" id='image_move_right' title='Move Right'><b>&#x2B9A;</b></button>
+                <button class='img-size-btn movement-btn' type="button" id="image_move_up" title='Move Up'><b>&#x2B99;</b> </button>
+                <button class='img-size-btn movement-btn' type="button" id="image_move_bottom" title='Move Down'><b>&#x2B9B;</b> </button>
+            </div>
+
+        </div>
 
 
 
@@ -337,6 +199,8 @@
 
 
     </section>
+
+
 
     <div class="product-area section">
         <div class="container">
@@ -457,53 +321,53 @@
                                                         <div class="name">Camo Blue</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P2" onclick="P('/images/images/patterns/camogreen.jpg')" style="background: url(/images/images/camo-green.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P2" onclick="P('../images/images/patterns/camogreen.jpg')" style="background: url(../images/images/camo-green.jpg);">&nbsp;</button>
                                                         <div class="name">Camo Green</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P3" onclick="P('/images/images/patterns/camoorange.jpg')" style="background: url(/images/images/camo-orange.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P3" onclick="P('../images/images/patterns/camoorange.jpg')" style="background: url(../images/images/camo-orange.jpg);">&nbsp;</button>
                                                         <div class="name">Camo Orange</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P4" onclick="P('/images/images/patterns/camopink.jpg')" style="background: url(/images/images/camo-pink.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P4" onclick="P('../images/images/patterns/camopink.jpg')" style="background: url(../images/images/camo-pink.jpg);">&nbsp;</button>
                                                         <div class="name">Camo Pink</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P5" onclick="P('/images/images/patterns/diamonds.jpg')" style="background: url(/images/images/diamonds.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P5" onclick="P('../images/images/patterns/diamonds.jpg')" style="background: url(../images/images/diamonds.jpg);">&nbsp;</button>
                                                         <div class="name">Diamonds</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P6" onclick="P('/images/images/patterns/rainbowbars.jpg')" style="background: url(/images/images/rainbow-bars.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P6" onclick="P('../images/images/patterns/rainbowbars.jpg')" style="background: url(../images/images/rainbow-bars.jpg);">&nbsp;</button>
                                                         <div class="name">Rainbow Bars</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P7" onclick="P('/images/images/patterns/starsblack.jpg')" style="background: url(/images/images/stars-black.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P7" onclick="P('../images/images/patterns/starsblack.jpg')" style="background: url(../images/images/stars-black.jpg);">&nbsp;</button>
                                                         <div class="name">Stars Black</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P8" onclick="P('/images/images/patterns/starsgreen.jpg')" style="background: url(/images/images/stars-green.jpg);
+                                                        <button class="swatch P-swatch" id="P8" onclick="P('../images/images/patterns/starsgreen.jpg')" style="background: url(../images/images/stars-green.jpg);
 ">
                                                             &nbsp;
                                                         </button>
                                                         <div class=" name ">Stars Green</div>
                                                     </div>
                                                     <div class=" swatch-panel ">
-                                                        <button class=" swatch P-swatch " id=" P9 " onclick=" P( '/images/images/patterns/starsred.jpg' ) " style="background: url(/images/images/stars-red.jpg);
+                                                        <button class=" swatch P-swatch " id=" P9 " onclick=" P('/images/images/patterns/starsred.jpg' ) " style="background: url(../images/images/stars-red.jpg);
 ">
                                                             &nbsp;
                                                         </button>
                                                         <div class=" name ">Stars Red</div>
                                                     </div>
                                                     <div class=" swatch-panel ">
-                                                        <button class=" swatch P-swatch " id=" P10 " onclick=" P( '/images/images/patterns/starsyellow.jpg' )" style="background: url(/images/images/stars-yellow.jpg);">&nbsp;</button>
+                                                        <button class=" swatch P-swatch " id=" P10 " onclick=" P( '/images/images/patterns/starsyellow.jpg' )" style="background: url(../images/images/stars-yellow.jpg);">&nbsp;</button>
                                                         <div class="name">Stars Yellow</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P11" onclick="P('/images/images/patterns/stars.jpg')" style="background: url(/images/images/stars.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P11" onclick="P('../images/images/patterns/stars.jpg')" style="background: url(../images/images/stars.jpg);">&nbsp;</button>
                                                         <div class="name">Stars</div>
                                                     </div>
                                                     <div class="swatch-panel">
-                                                        <button class="swatch P-swatch" id="P12" onclick="P('/images/images/patterns/starslight.jpg')" style="background: url(/images/images/stars-light.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="P12" onclick="P('../images/images/patterns/starslight.jpg')" style="background: url(../images/images/stars-light.jpg);">&nbsp;</button>
                                                         <div class="name">Stars Light</div>
                                                     </div>
                                                 </div>
@@ -518,51 +382,51 @@
                                             <div class="slider_block">
                                                 <div class="colour_slider" id="wcontainer">
                                                     <div class="swatch-panel" data-hex="url(images/rainbow.jpg)" data-colourid="1466">
-                                                        <button class="swatch P-swatch" id="G1" onclick="G('/images/images/Gradients/Rainbow.jpg')" style="background: url(/images/images/rainbow.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G1" onclick="G('../images/images/Gradients/Rainbow.jpg')" style="background: url(../images/images/rainbow.jpg);">&nbsp;</button>
                                                         <div class="name">Rainbow</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/rainbow-fade.jpg)" data-colourid="1467">
-                                                        <button class="swatch P-swatch" id="G2" onclick="G('/images/images/Gradients/Rainbowfade.jpg')" style="background: url(/images/images/rainbow-fade.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G2" onclick="G('../images/images/Gradients/Rainbowfade.jpg')" style="background: url(../images/images/rainbow-fade.jpg);">&nbsp;</button>
                                                         <div class="name">Rainbow Fade</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-blue.jpg)" data-colourid="1468">
-                                                        <button class="swatch P-swatch" id="G3" onclick="G('/images/images/Gradients/Gradientblue.jpg')" style="background: url(/images/images/gradient-blue.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G3" onclick="G('../images/images/Gradients/Gradientblue.jpg')" style="background: url(../images/images/gradient-blue.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Blue</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-green.jpg)" data-colourid="1469">
-                                                        <button class="swatch P-swatch" id="G4" onclick="G('/images/images/Gradients/Gradientgreen.jpg')" style="background: url(/images/images/gradient-green.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G4" onclick="G('../images/images/Gradients/Gradientgreen.jpg')" style="background: url(../images/images/gradient-green.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Green</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-purple.jpg)" data-colourid="1470">
-                                                        <button class="swatch P-swatch" id="G5" onclick="G('/images/images/Gradients/Gradientpurple.jpg')" style="background: url(/images/images/gradient-purple.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G5" onclick="G('../images/images/Gradients/Gradientpurple.jpg')" style="background: url(../images/images/gradient-purple.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Purple</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-red.jpg)" data-colourid="1471">
-                                                        <button class="swatch P-swatch" id="G6" onclick="G('/images/images/Gradients/Gradientred.jpg')" style="background: url(/images/images/gradient-red.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G6" onclick="G('../images/images/Gradients/Gradientred.jpg')" style="background: url(../images/images/gradient-red.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Red</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-yellow.jpg)" data-colourid="1472">
-                                                        <button class="swatch P-swatch" id="G7" onclick="G('/images/images/Gradients/Gradientyellow.jpg')" style="background: url(/images/images/gradient-yellow.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G7" onclick="G('../images/images/Gradients/Gradientyellow.jpg')" style="background: url(../images/images/gradient-yellow.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Yellow</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-green-to-blue.jpg)" data-colourid="1473">
-                                                        <button class="swatch P-swatch" id="G8" onclick="G('/images/images/Gradients/greentoblue.jpg')" style="background: url(/images/images/gradient-green-to-blue.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G8" onclick="G('../images/images/Gradients/greentoblue.jpg')" style="background: url(../images/images/gradient-green-to-blue.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Green to Blue</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-green-to-purple.jpg)" data-colourid="1474">
-                                                        <button class="swatch P-swatch" id="G9" onclick="G('/images/images/Gradients/greentopurple.jpg')" style="background: url(/images/images/gradient-green-to-purple.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G9" onclick="G('../images/images/Gradients/greentopurple.jpg')" style="background: url(../images/images/gradient-green-to-purple.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Green to Purple</div>
                                                     </div>
                                                     <div class="swatch-panel" data-hex="url(images/gradient-red-to-purple.jpg)" data-colourid="1475">
-                                                        <button class="swatch P-swatch" id="G10" onclick="G('/images/images/Gradients/redtopurple.jpg')" style="background: url(/images/images/gradient-red-to-purple.jpg);">&nbsp;</button>
+                                                        <button class="swatch P-swatch" id="G10" onclick="G('../images/images/Gradients/redtopurple.jpg')" style="background: url(../images/images/gradient-red-to-purple.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Red to Purple</div>
                                                     </div>
-                                                    <div class="swatch-panel" data-hex="url(/images/images/Gradients/Redtoyellow.jpg)" data-colourid="1476">
-                                                        <button class="swatch P-swatch" id="G11" onclick="G('/images/images/Gradients/redtoyellow.jpg')" style="background: url(/images/images/gradient-red-to-yellow.jpg);">&nbsp;</button>
+                                                    <div class="swatch-panel" data-hex="url(../images/images/Gradients/Redtoyellow.jpg)" data-colourid="1476">
+                                                        <button class="swatch P-swatch" id="G11" onclick="G('../images/images/Gradients/redtoyellow.jpg')" style="background: url(../images/images/gradient-red-to-yellow.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Red to Yellow</div>
                                                     </div>
-                                                    <div class="swatch-panel" data-hex="url(/images/images/gradient-yellow-to-blue.jpg)" data-colourid="1477">
-                                                        <button class="swatch P-swatch" id="G12" onclick="G('/images/images/Gradients/yellowtoblue.jpg')" style="background: url(/images/images/gradient-yellow-to-blue.jpg);">&nbsp;</button>
+                                                    <div class="swatch-panel" data-hex="url(../images/images/gradient-yellow-to-blue.jpg)" data-colourid="1477">
+                                                        <button class="swatch P-swatch" id="G12" onclick="G('../images/images/Gradients/yellowtoblue.jpg')" style="background: url(../images/images/gradient-yellow-to-blue.jpg);">&nbsp;</button>
                                                         <div class="name">Gradient Yellow to Blue</div>
                                                     </div>
                                                 </div>
@@ -756,10 +620,24 @@
                                                             <div class="col-xl-4 col-lg-4 col-md-4 col-12">
 
                                                                 <P class="tooltip-t">Upload Your Image here </P><br>
-                                                                <label for="upload" class="file-upload btn btn-primary btn-block">
-                                                                    <i class="fa fa-upload mr-2"></i>Upload Image
-                                                                    <input id="upload" type="file" />
-                                                                </label>
+                                                                <a id="new_upload_btn" href="Javascript:void(0)">Add more images</a>
+
+                                                                <br><br>
+
+                                                                Upload Image
+                                                                    <div id="img-upload-area">
+                                                                        <input id="upload" class="logo_image" type="file" /> <br /><br />
+                                                                        <!--
+                                                                        <button class='img-size-btn' id='logo_image_plus' type="button" title='Increase size'>+</button>
+                                                                        <button class='img-size-btn' type="button" id='logo_image_minus' title='Decrease size'>-</button>
+                                                                        <button class='img-size-btn' type="button" id="btn-remove-logo" title='Decrease size'>D</button>
+                                                                        <br /><br />
+                                                                        -->
+                                                                    </div>
+
+
+
+
                                                             </div>
                                                         </div>
 
@@ -783,7 +661,7 @@
                                                 Custom logos work best on a white wristband. You can change the base colour in the previous steps. We accept jpg, jpeg, gif, png and svg file formats.
                                             </p>
                                             <label for="fileUpload" class="file-upload btn btn-primary btn-block">
-                                                <i class="fa fa-upload mr-2"></i>Upload Image
+                                                Upload Image
                                                 <input id="upload" type="file" />
                                             </label>
 
@@ -794,6 +672,8 @@
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-12">
                                             Or use our stock logos
                                         </div>
+
+
 
                                     </div>
                                 </div>
@@ -814,19 +694,19 @@
                                             <p class="ast">
                                                 Add Barcodes/2D Codes
                                                 <div class="code-panel">
-                                                    <button class="code C-code" id="code128" onclick="code('/images/images/barcode128.png')" style="        background: url(/images/images/barcode128.png);">&nbsp;</button>
+                                                    <button class="code C-code" id="code128" onclick="code('../images/images/barcode128.png')" style="        background: url(../images/images/barcode128.png);">&nbsp;</button>
                                                     <div class="codename">Barcode 128</div>
                                                 </div>
                                                 <div class="code-panel">
-                                                    <button class="code C-code" id="code39" onclick="code('/images/images/barcode39.png')" style="        background: url(/images/images/barcode39.jpg);">&nbsp;</button>
+                                                    <button class="code C-code" id="code39" onclick="code('../images/images/barcode39.png')" style="        background: url(../images/images/barcode39.jpg);">&nbsp;</button>
                                                     <div class="codename">Barcode 39</div>
                                                 </div>
                                                 <div class="code-panel">
-                                                    <button class="code C-code" id="qrcode" onclick="code('/images/images/Qrcode.png')" style="        background: url(/images/images/Qrcode.jpg);">&nbsp;</button>
+                                                    <button class="code C-code" id="qrcode" onclick="code('../images/images/Qrcode.png')" style="        background: url(../images/images/Qrcode.jpg);">&nbsp;</button>
                                                     <div class="codename">QR Code</div>
                                                 </div>
                                                 <div class="code-panel">
-                                                    <button class="code C-code" id="datamatrix" onclick="code('/images/images/datamatrix.png')" style="        background: url(/images/images/datamatrix.jpg);">&nbsp;</button>
+                                                    <button class="code C-code" id="datamatrix" onclick="code('../images/images/datamatrix.png')" style="        background: url(../images/images/datamatrix.jpg);">&nbsp;</button>
                                                     <div class="codename">Data Matrix</div>
                                                 </div>
                                         </div>
@@ -842,7 +722,7 @@
     </div>
 
 
-    
+
 
     <script>
         initSample();

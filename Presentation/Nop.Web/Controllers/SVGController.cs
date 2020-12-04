@@ -44,6 +44,7 @@ namespace Nop.Web.Controllers
             ViewBag.svgcontent = svgcontent.SvgContent;
             return View();
         }
+        
 
         #endregion Methods
     }

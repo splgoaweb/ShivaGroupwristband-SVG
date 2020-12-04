@@ -3,12 +3,14 @@ function demo() {
     var p = document.getElementById("myP");
     var input = document.getElementById("TextField");
     p.textContent = input.value;
+    document.getElementById("TextFieldEdit").value = input.value;
 }
 //Textfield for line 2
 function newdemo() {
     var p = document.getElementById("myPnew");
     var input = document.getElementById("TextField2");
     p.textContent = input.value;
+    document.getElementById("TextFieldEdit2").value = input.value;
 }
 
 //Adding New Line option
